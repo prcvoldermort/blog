@@ -25,7 +25,16 @@
                         <a href="/posts/{{$post->id}}/edit" class="btn btn-primary btn-block">Edit</a>
                     </div>
                     <div class="col-sm-6">
-                        <a href="/posts/{{$post->id}}" class="btn btn-danger btn-block">Delete</a>
+                        <form action="/posts/{{$post->id}}" method="post">
+                            {{csrf_field()}}
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="submit" class="btn btn-danger btn-block" value="delete">
+                        </form>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <a href="/posts" class="btn btn-default btn-block" style="margin-top: 10px"><< See All Posts</a>
                     </div>
                 </div>
             </div>
