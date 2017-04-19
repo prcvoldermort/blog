@@ -12,6 +12,11 @@
                 <input required maxlength="255" type="text" class="form-control" id="title" name="title" value="{{$post->title}}">
             </div>
             <div class="form-group">
+                <label for="slug"></label>
+                <input required minlength="5" maxlength="255" type="text" class="form-control" id="slug" name="slug"
+                       value="{{$post->slug}}">
+            </div>
+            <div class="form-group">
                 <label for="body">Body</label>
                 <textarea required class="form-control" id="body" name="body" rows="5">{{$post->body}}</textarea>
             </div>
@@ -33,7 +38,7 @@
                     </div>
                     <input type="hidden" name="_method" value="PUT">
                     <div class="col-sm-6">
-                        <input type="submit" href="/posts/{{$post->id}}" class="btn btn-success btn-block"></input>
+                        <input type="submit" href="/posts/{{$post->id}}" class="btn btn-success btn-block">
                     </div>
                 </div>
             </div>

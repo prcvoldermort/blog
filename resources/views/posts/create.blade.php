@@ -18,6 +18,11 @@
                     <input required maxlength="255" type="text" class="form-control" id="title" name="title" placeholder="here to enter title">
                 </div>
                 <div class="form-group">
+                    <label for="slug">Slug</label>
+                    <input required maxlength="255" minlength="5" type="text" class="form-control" id="slug" name="slug"
+                           placeholder="here to input post slug, word separated with '-'">
+                </div>
+                <div class="form-group">
                     <label for="body">Body</label>
                     <textarea required class="form-control" id="body" name="body" rows="5"></textarea>
                 </div>

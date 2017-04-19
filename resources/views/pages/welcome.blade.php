@@ -19,7 +19,7 @@
             <div class="post">
                 <h3>{{$post->title}}</h3>
                 <p>{{$post->body}}</p>
-                <a href="#" class="btn btn-primary">Read more</a>
+                <a href="{{url('blog/'.$post->slug)}}" class="btn btn-primary">Read more</a>
             </div>
             <hr>
         @endforeach
