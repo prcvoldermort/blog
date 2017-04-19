@@ -14,4 +14,10 @@ class BlogController extends Controller
         // return the value and pass in the post object
         return view('blog.single')->with('post', $post);
     }
+
+    public function getIndex()
+    {
+        $posts = Post::paginate(2);
+        return view('blog.index')->withPosts($posts);
+    }
 }
