@@ -23,6 +23,14 @@
                            placeholder="here to input post slug, word separated with '-'">
                 </div>
                 <div class="form-group">
+                    <label for="category_id">Category:</label>
+                    <select id="category_id" name="category_id" class="form-control">
+                        @foreach($categories as $category)
+                            <option value="{{$category->id}}">{{$category->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group">
                     <label for="body">Body</label>
                     <textarea required class="form-control" id="body" name="body" rows="5"></textarea>
                 </div>

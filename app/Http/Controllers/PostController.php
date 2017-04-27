@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\Category;
 use Illuminate\Http\Request;
 use Session;
 
@@ -30,7 +31,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        $categories = Category::all();
+        return view('posts.create')->withCategories($categories);
     }
 
     /**
@@ -44,6 +46,7 @@ class PostController extends Controller
         // validate the data
         $this->validate($request,array(
             'title' => 'required | max:255',
+            'category_id' => 'required | integer',
             'slug' => 'required | min:5 | max:255 | alpha_dash',
             'body' => 'required'
         ));
@@ -52,6 +55,7 @@ class PostController extends Controller
         $post->title = $request->title;
         $post->slug = $request->slug;
         $post->body = $request->body;
+        $post->category_id = $request->category_id;
 
         $post->save();
 
@@ -83,8 +87,9 @@ class PostController extends Controller
     {
         // find the post in the database and save as a var
         $post = Post::find($id);
+        $categories = Category::all();
         // return the view and pass in the var we've created
-        return view('posts.edit')->with('post',$post);
+        return view('posts.edit')->with('post', $post)->withCategories($categories);
     }
 
     /**
@@ -99,6 +104,7 @@ class PostController extends Controller
         // validate the data
         $this->validate($request,array(
             'title' => 'required | max:255',
+            'category_id' => 'required | max:255',
             'slug' => 'required | min:5 | max:255 | alpha_dash',
             'body' => 'required'
         ));
@@ -107,6 +113,7 @@ class PostController extends Controller
 
         $post->title = $request->title;
         $post->slug = $request->slug;
+        $post->category_id = $request->category_id;
         $post->body = $request->body;
 
         $post->save();
