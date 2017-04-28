@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use App\Category;
+use App\Tag;
 use Illuminate\Http\Request;
 use Session;
 
@@ -32,7 +33,8 @@ class PostController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('posts.create')->withCategories($categories);
+        $tags = Tag::all();
+        return view('posts.create')->withCategories($categories)->withTags($tags);
     }
 
     /**
@@ -58,6 +60,9 @@ class PostController extends Controller
         $post->category_id = $request->category_id;
 
         $post->save();
+
+        // Sync the intermediate tables with a list of IDs or collection of models
+        $post->tags()->sync($request->tags, false);
 
         // session
         Session::flash('success', 'The blog post was successfully saved!');
@@ -88,8 +93,10 @@ class PostController extends Controller
         // find the post in the database and save as a var
         $post = Post::find($id);
         $categories = Category::all();
+
+        $tags = Tag::all();
         // return the view and pass in the var we've created
-        return view('posts.edit')->with('post', $post)->withCategories($categories);
+        return view('posts.edit')->with('post', $post)->withCategories($categories)->withTags($tags);
     }
 
     /**
@@ -117,6 +124,13 @@ class PostController extends Controller
         $post->body = $request->body;
 
         $post->save();
+
+        if (isset($request->tags)) {
+            $post->tags()->sync($request->tags, true);
+        } else {
+            $post->tags()->sync(array(), true);
+        }
+
         // set flash data with success message
         Session::flash('success','This post was successfully saved.');
 

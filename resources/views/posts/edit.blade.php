@@ -2,6 +2,11 @@
 
 @section('title','| Edit the post')
 
+@section('stylesheets')
+    <link rel="stylesheet" href="/css/parsley.css" type="text/css">
+    <link rel="stylesheet" href="/css/select2.min.css" type="text/css">
+@endsection
+
 @section('content')
     <div class="row">
         <form action="/posts/{{$post->id}}" method="post">
@@ -25,6 +30,14 @@
                         @else
                             <option value="{{$category->id}}">{{$category->name}}</option>
                         @endif
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="tags">Tags:</label>
+                <select id="tags" name="tags[]" class="form-control select2-multi" multiple="multiple">
+                    @foreach($tags as $tag)
+                        <option value="{{$tag->id}}">{{$tag->name}}</option>
                     @endforeach
                 </select>
             </div>
@@ -57,4 +70,13 @@
         </div>
         </form>
     </div>
+@endsection
+
+@section('scripts')
+    <script type="text/javascript" src="/js/parsley.min.js"></script>
+    <script type="text/javascript" src="/js/select2.min.js"></script>
+    <script type="text/javascript">
+        $('.select2-multi').select2();
+        $('.select2-multi').select2().val({{json_encode($post->tags()->allRelatedIds())}}).trigger('change');
+    </script>
 @endsection

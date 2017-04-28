@@ -30,3 +30,6 @@ Route::get('/home', 'HomeController@index');
 
 // categories routes
 Route::resource('categories', 'CategoryController', ['except' => ['create']]);
+
+// Tags routes
+Route::resource('tags', 'TagController', ['except' => ['create']]);
