@@ -6,7 +6,8 @@
     <div class="col-md-12">
         <h1>Contact Me</h1>
         <hr>
-        <form>
+        <form action="/contact" method="post">
+            {{csrf_field()}}
             <div class="form-group">
                 <label for="email">Email:</label>
                 <input id="email" name="email" class="form-control">
