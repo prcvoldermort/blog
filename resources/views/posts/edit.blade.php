@@ -5,6 +5,12 @@
 @section('stylesheets')
     <link rel="stylesheet" href="/css/parsley.css" type="text/css">
     <link rel="stylesheet" href="/css/select2.min.css" type="text/css">
+    <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+    <script>
+        tinymce.init({
+            selector: 'textarea'
+        });
+    </script>
 @endsection
 
 @section('content')
@@ -43,7 +49,7 @@
             </div>
             <div class="form-group">
                 <label for="body">Body</label>
-                <textarea required class="form-control" id="body" name="body" rows="5">{{$post->body}}</textarea>
+                <textarea class="form-control" id="body" name="body" rows="5">{{$post->body}}</textarea>
             </div>
         </div>
         <div class="col-md-4">
