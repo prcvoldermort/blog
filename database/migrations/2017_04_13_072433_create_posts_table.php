@@ -17,6 +17,7 @@ class CreatePostsTable extends Migration
             $table->increments('id');
             $table->string('title')->default("No Title Given");
             $table->text('body');
+            $table->string('slug')->unique();
             $table->timestamps();
         });
     }
